@@ -82,7 +82,7 @@ class PillWidget(QWidget):
         if screen:
             geo = screen.availableGeometry()
             x = geo.center().x() - int(self._current_width) // 2
-            y = geo.bottom() - PILL_MARGIN_BOTTOM - PILL_HEIGHT
+            y = geo.bottom() - 4 - PILL_HEIGHT
             self.move(x, y)
 
     def _setup_native_macos(self):
@@ -174,7 +174,7 @@ class PillWidget(QWidget):
         logo_area = logo_pad + LOGO_SIZE + 4
         content_w = w - logo_area - 4
         if content_w > 0 and self.visualizer.isVisible():
-            self.visualizer.setGeometry(logo_area, 5, content_w, h - 10)
+            self.visualizer.setGeometry(logo_area, 2, content_w, h - 4)
 
     def paintEvent(self, event):
         painter = QPainter(self)

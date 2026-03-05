@@ -15,7 +15,7 @@ BLOCK_SIZE = 1024
 
 # UI
 PILL_WIDTH_IDLE = 34
-PILL_WIDTH_RECORDING = 120
+PILL_WIDTH_RECORDING = 100
 PILL_WIDTH_STATUS = 52
 PILL_HEIGHT = 34
 PILL_OPACITY = 0.90
@@ -27,10 +27,10 @@ LOGO_SIZE = 22
 LOGO_PATH = os.path.join(os.path.dirname(__file__), "logo_small.png")
 
 # Audio Visualizer
-NUM_BARS = 8
-VIZ_FPS = 30
-BAR_DECAY = 0.80
-BAR_GAIN = 6.0
+NUM_BARS = 20
+VIZ_FPS = 60
+BAR_DECAY = 0.85
+BAR_GAIN = 8.0
 
 # Hotkey
 DOUBLE_TAP_INTERVAL = 0.4  # seconds for double-tap detection
