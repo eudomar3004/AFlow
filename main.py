@@ -22,6 +22,16 @@ from db.database import TranscriptionDB
 from web.server import start_web_server
 from config import LOGO_PATH, APP_DATA_DIR, GROQ_API_KEY
 
+
+def _ensure_accessibility() -> bool:
+    """Prompt macOS to grant Accessibility if not trusted. Returns True if already trusted."""
+    try:
+        from ApplicationServices import AXIsProcessTrustedWithOptions
+        return AXIsProcessTrustedWithOptions({"AXTrustedCheckOptionPrompt": True})
+    except Exception:
+        return True
+
+
 # LaunchAgent constants
 _LAUNCH_AGENT_LABEL = "so.saasfactory.sflow"
 _PLIST_PATH = os.path.expanduser(f"~/Library/LaunchAgents/{_LAUNCH_AGENT_LABEL}.plist")
@@ -258,6 +268,9 @@ def main():
 
     # Start web dashboard
     port = start_web_server()
+
+    # Request Accessibility permission (shows macOS prompt if not granted)
+    _ensure_accessibility()
 
     # Start the app
     sflow = SFlowApp()
