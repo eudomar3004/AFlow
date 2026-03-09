@@ -23,8 +23,14 @@ def save_frontmost_app():
 def paste_text(text: str):
     """Copy text to clipboard and paste into the previously active app."""
     global _saved_app
-    # Copy to clipboard
-    subprocess.run(["pbcopy"], input=text.encode("utf-8"), check=True)
+    # Copy to clipboard via NSPasteboard (avoids encoding issues in .app bundles)
+    try:
+        from AppKit import NSPasteboard, NSPasteboardTypeString
+        pb = NSPasteboard.generalPasteboard()
+        pb.clearContents()
+        pb.setString_forType_(text, NSPasteboardTypeString)
+    except Exception:
+        subprocess.run(["pbcopy"], input=text.encode("utf-8"), check=True)
 
     # Restore focus to the app that was active before recording
     if _saved_app:
