@@ -12,3 +12,6 @@ build/
 *.log
 start_sflow.sh
 .sflow.lock
+logo-v*.png
+logo-*-clean.png
+*.iconset/
