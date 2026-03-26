@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="logo.png" width="120" alt="SFlow Logo">
+  <img src="logo.png" width="120" alt="AFlow Logo">
 </p>
 
-<h1 align="center">SFlow</h1>
+<h1 align="center">AFlow</h1>
 
 <p align="center">
   <strong>Open-source voice-to-text for macOS. Wispr Flow alternative at 99% lower cost.</strong>
@@ -18,11 +18,11 @@
 
 ---
 
-## What is SFlow?
+## What is AFlow?
 
-SFlow is a **system-wide voice-to-text tool** for macOS. Hold a hotkey, speak, release — your words appear wherever your cursor is. Any app, any text field, any language.
+AFlow is a **system-wide voice-to-text tool** for macOS. Hold a hotkey, speak, release — your words appear wherever your cursor is. Any app, any text field, any language.
 
-Built as a replacement for [Wispr Flow](https://wispr.com) ($15/month). SFlow uses [Groq's Whisper API](https://console.groq.com/docs/speech-to-text) at **~$0.02/hour** — that's roughly **$0.60/month** with heavy daily use.
+Built as a replacement for [Wispr Flow](https://wispr.com) ($15/month). AFlow uses [Groq's Whisper API](https://console.groq.com/docs/speech-to-text) at **~$0.02/hour** — that's roughly **$0.60/month** with heavy daily use.
 
 ### Features
 
@@ -52,8 +52,8 @@ Built as a replacement for [Wispr Flow](https://wispr.com) ($15/month). SFlow us
 
 ```bash
 # Clone
-git clone https://github.com/daniel-carreon/sflow.git
-cd sflow
+git clone https://github.com/daniel-carreon/aflow.git
+cd aflow
 
 # System dependency
 brew install portaudio
@@ -67,17 +67,17 @@ pip install -r requirements.txt
 bash build.sh
 
 # Install (IMPORTANT: use ditto, not cp -r)
-ditto dist/SFlow.app /Applications/SFlow.app
-xattr -cr /Applications/SFlow.app
+ditto dist/AFlow.app /Applications/AFlow.app
+xattr -cr /Applications/AFlow.app
 ```
 
-Open SFlow from Spotlight or `/Applications`. On first launch it asks for your [Groq API key](https://console.groq.com/keys).
+Open AFlow from Spotlight or `/Applications`. On first launch it asks for your [Groq API key](https://console.groq.com/keys).
 
 ### Install (Dev Mode)
 
 ```bash
-git clone https://github.com/daniel-carreon/sflow.git
-cd sflow
+git clone https://github.com/daniel-carreon/aflow.git
+cd aflow
 brew install portaudio
 python3 -m venv venv
 source venv/bin/activate
@@ -113,7 +113,7 @@ python3 main.py
 
 ## macOS Permissions
 
-SFlow needs these permissions (System Settings → Privacy & Security):
+AFlow needs these permissions (System Settings → Privacy & Security):
 
 1. **Accessibility** — for global hotkeys and auto-paste (add your Terminal app)
 2. **Microphone** — for audio capture (requested automatically)
@@ -179,7 +179,7 @@ GROQ_MODEL = "whisper-large-v3-turbo"  # fastest Groq model
 
 ## Cost Comparison
 
-| | Wispr Flow | SFlow |
+| | Wispr Flow | AFlow |
 |---|---|---|
 | Monthly cost | $15/month | ~$0.60/month* |
 | Annual cost | $180/year | ~$7.20/year* |
@@ -201,8 +201,8 @@ GROQ_MODEL = "whisper-large-v3-turbo"  # fastest Groq model
 | Paste goes to wrong app | This is the focus-steal issue — ensure PyObjC native setup works |
 | Ctrl+C doesn't quit | Should work out of the box (SIGINT handler). Try `kill %1` |
 | Dashboard not loading | Port auto-selects from 5678: `lsof -i :5678` |
-| .app crashes (segfault) | Reinstall with `ditto` (not `cp -r`): `ditto dist/SFlow.app /Applications/SFlow.app` |
-| .app blocked by macOS | Remove quarantine: `xattr -cr /Applications/SFlow.app` |
+| .app crashes (segfault) | Reinstall with `ditto` (not `cp -r`): `ditto dist/AFlow.app /Applications/AFlow.app` |
+| .app blocked by macOS | Remove quarantine: `xattr -cr /Applications/AFlow.app` |
 
 ---
 

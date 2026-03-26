@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SFlow - Voice-to-text desktop tool powered by Groq Whisper."""
+"""AFlow - Voice-to-text desktop tool powered by Groq Whisper."""
 
 import os
 import sys
@@ -33,7 +33,7 @@ def _ensure_accessibility() -> bool:
 
 
 # LaunchAgent constants
-_LAUNCH_AGENT_LABEL = "so.saasfactory.sflow"
+_LAUNCH_AGENT_LABEL = "so.saasfactory.aflow"
 _PLIST_PATH = os.path.expanduser(f"~/Library/LaunchAgents/{_LAUNCH_AGENT_LABEL}.plist")
 
 
@@ -45,7 +45,7 @@ class FirstRunDialog(QDialog):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("SFlow - Setup")
+        self.setWindowTitle("AFlow - Setup")
         self.setFixedWidth(420)
 
         layout = QVBoxLayout()
@@ -92,7 +92,7 @@ def _is_launch_at_login() -> bool:
 def _set_launch_at_login(enabled: bool):
     if enabled:
         if getattr(sys, "frozen", False):
-            # In .app bundle: executable is Contents/MacOS/SFlow
+            # In .app bundle: executable is Contents/MacOS/AFlow
             exe = sys.executable
         else:
             exe = os.path.abspath(sys.argv[0])
@@ -138,7 +138,7 @@ def _setup_tray(app: QApplication, port: int) -> QSystemTrayIcon:
 
     menu = QMenu()
 
-    status = QAction("SFlow - Activo", menu)
+    status = QAction("AFlow - Activo", menu)
     status.setEnabled(False)
     menu.addAction(status)
     menu.addSeparator()
@@ -160,7 +160,7 @@ def _setup_tray(app: QApplication, port: int) -> QSystemTrayIcon:
     menu.addAction(quit_action)
 
     tray.setContextMenu(menu)
-    tray.setToolTip("SFlow - Voice to Text")
+    tray.setToolTip("AFlow - Voice to Text")
     tray.show()
     return tray
 
@@ -168,7 +168,7 @@ def _setup_tray(app: QApplication, port: int) -> QSystemTrayIcon:
 # ---------------------------------------------------------------------------
 # Main app controller
 # ---------------------------------------------------------------------------
-class SFlowApp(QObject):
+class AFlowApp(QObject):
     """Main application controller. Wires hotkey -> recorder -> transcriber -> clipboard."""
 
     transcription_done = pyqtSignal(str, float)
@@ -246,7 +246,7 @@ class SFlowApp(QObject):
 # ---------------------------------------------------------------------------
 def main():
     app = QApplication(sys.argv)
-    app.setApplicationName("SFlow")
+    app.setApplicationName("AFlow")
     app.setQuitOnLastWindowClosed(False)
 
     # Allow Ctrl+C to kill the app
@@ -273,8 +273,8 @@ def main():
     _ensure_accessibility()
 
     # Start the app
-    sflow = SFlowApp()
-    sflow.start()
+    aflow = AFlowApp()
+    aflow.start()
 
     # System tray icon
     tray = _setup_tray(app, port)  # noqa: F841 — must keep reference alive

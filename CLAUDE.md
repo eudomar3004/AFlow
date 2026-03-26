@@ -1,8 +1,8 @@
-# CLAUDE.md — SFlow Development Instructions
+# CLAUDE.md — AFlow Development Instructions
 
-## What is SFlow?
+## What is AFlow?
 
-SFlow is a macOS voice-to-text desktop tool that replaces Wispr Flow ($15/month). It captures audio via global hotkeys, transcribes using Groq Whisper API (~$0.02/hour), and auto-pastes text wherever the cursor is. It includes a floating pill UI overlay, real-time audio visualization, SQLite history, and a web dashboard.
+AFlow is a macOS voice-to-text desktop tool that replaces Wispr Flow ($15/month). It captures audio via global hotkeys, transcribes using Groq Whisper API (~$0.02/hour), and auto-pastes text wherever the cursor is. It includes a floating pill UI overlay, real-time audio visualization, SQLite history, and a web dashboard.
 
 ## Quick Start (Dev Mode)
 
@@ -28,18 +28,18 @@ python3 main.py
 ## Build Desktop App (.app bundle)
 
 ```bash
-# Build SFlow.app (generates icns, builds with PyInstaller, signs ad-hoc)
+# Build AFlow.app (generates icns, builds with PyInstaller, signs ad-hoc)
 bash build.sh
 
 # Install to Applications (MUST use ditto, not cp -r)
-ditto dist/SFlow.app /Applications/SFlow.app
+ditto dist/AFlow.app /Applications/AFlow.app
 
 # Remove quarantine if needed
-xattr -cr /Applications/SFlow.app
+xattr -cr /Applications/AFlow.app
 ```
 
 The .app bundle is self-contained (~107MB). No Python, no venv, no terminal needed.
-On first launch, if no API key exists in `~/Library/Application Support/SFlow/.env`,
+On first launch, if no API key exists in `~/Library/Application Support/AFlow/.env`,
 a dialog asks for it. The app lives in the menu bar (no Dock icon).
 
 ### Build Requirements
@@ -56,10 +56,10 @@ a dialog asks for it. The app lives in the menu bar (no Dock icon).
 ## Project Structure
 
 ```
-sflow/
+aflow/
 ├── main.py                 # Entry point — tray icon, first-run dialog, launch-at-login, app controller
 ├── config.py               # All configuration constants (UI, audio, paths, bundle detection)
-├── sflow.spec              # PyInstaller spec for building .app bundle
+├── aflow.spec              # PyInstaller spec for building .app bundle
 ├── build.sh                # One-shot build script (icns → PyInstaller → sign)
 ├── ui/
 │   ├── pill_widget.py      # Floating pill overlay (native macOS via PyObjC)
@@ -75,7 +75,7 @@ sflow/
 │   └── server.py           # Flask dashboard at localhost:5678 (auto-finds free port)
 ├── logo.png                # Brand logo (full size, used for .icns generation)
 ├── logo_small.png          # Brand logo (22x22 for menu bar + pill)
-├── SFlow.icns              # macOS app icon (generated from logo.png)
+├── AFlow.icns              # macOS app icon (generated from logo.png)
 ├── requirements.txt
 ├── .env                    # GROQ_API_KEY (never committed)
 └── .env.example
@@ -139,7 +139,7 @@ Recordings under 0.3 seconds are accidental taps — skip transcription and retu
 ### 6. Bundle vs Dev Mode (config.py)
 `config.py` detects `sys.frozen` to switch between dev and .app bundle:
 - **Dev mode**: assets and data live in the project root directory
-- **Bundle mode**: read-only assets (logo) come from `sys._MEIPASS`, writable data (DB, .env) goes to `~/Library/Application Support/SFlow/`
+- **Bundle mode**: read-only assets (logo) come from `sys._MEIPASS`, writable data (DB, .env) goes to `~/Library/Application Support/AFlow/`
 
 ### 7. Desktop App Features (main.py)
 - **System Tray**: QSystemTrayIcon in menu bar with dashboard link, "Start with macOS" toggle, quit
@@ -154,7 +154,7 @@ Default port is 5678 (not 5000 which conflicts with AirPlay on macOS 12+). Auto-
 - Use `ditto` (not `cp -r`) to copy .app to /Applications — `cp -r` corrupts bundle metadata causing segfaults
 - The .icns is auto-generated from logo.png by build.sh if missing
 - Ad-hoc signing (`codesign --force --deep --sign -`) is sufficient for personal use
-- Remove quarantine after install: `xattr -cr /Applications/SFlow.app`
+- Remove quarantine after install: `xattr -cr /Applications/AFlow.app`
 
 ## Customization
 
@@ -196,6 +196,6 @@ The PRP contains all the architectural decisions, gotchas, and anti-patterns dis
 | Short taps trigger transcription | Adjust the 0.3s threshold in `main.py` `_on_hotkey_released` |
 | Web dashboard not loading | Port auto-selects from 5678. Check: `lsof -i :5678` |
 | .app crashes on launch (segfault) | Was copied with `cp -r` instead of `ditto`. Reinstall with `ditto` |
-| .app blocked by macOS | Run `xattr -cr /Applications/SFlow.app` to remove quarantine |
+| .app blocked by macOS | Run `xattr -cr /Applications/AFlow.app` to remove quarantine |
 | First-run dialog invisible | Bug if NSApplicationActivationPolicyAccessory is set before dialog. Already fixed |
 | Transcription hangs forever | API timeout is 10s. Check your GROQ_API_KEY is valid |

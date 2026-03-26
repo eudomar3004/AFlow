@@ -1,5 +1,6 @@
 import math
 import queue
+from typing import Optional
 import numpy as np
 from PyQt6.QtWidgets import QWidget
 from PyQt6.QtCore import QTimer, Qt, QRectF
@@ -15,7 +16,7 @@ class AudioVisualizer(QWidget):
         self.num_bars = NUM_BARS
         self.bar_values = [0.0] * self.num_bars
         self._velocities = [0.0] * self.num_bars
-        self.audio_queue: queue.Queue | None = None
+        self.audio_queue: Optional[queue.Queue] = None
 
         self._timer = QTimer()
         self._timer.setInterval(1000 // VIZ_FPS)

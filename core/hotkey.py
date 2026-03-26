@@ -1,4 +1,5 @@
 import time
+from typing import Optional
 from pynput import keyboard
 from PyQt6.QtCore import QObject, pyqtSignal
 from config import DOUBLE_TAP_INTERVAL
@@ -20,7 +21,7 @@ class HotkeyListener(QObject):
         self._alt_held = False
         self._recording = False
         self._hands_free = False
-        self._listener: keyboard.Listener | None = None
+        self._listener: Optional[keyboard.Listener] = None
 
         # Double-tap detection
         self._last_ctrl_release = 0.0

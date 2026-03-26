@@ -1,9 +1,9 @@
-# PRP-001: SFlow — Voice-to-Text Desktop Tool (Wispr Flow Alternative)
+# PRP-001: AFlow — Voice-to-Text Desktop Tool (Wispr Flow Alternative)
 
 > **Status**: COMPLETED
 > **Date**: 2026-03-04
 > **Author**: Claude Opus 4.6
-> **Project**: sflow
+> **Project**: aflow
 
 ---
 
@@ -33,7 +33,7 @@ This is a fully functional replacement for Wispr Flow ($15/month) built from scr
 
 ### Expected Behavior
 
-1. Launch `sflow` — a small floating pill appears at the bottom-center of the screen (logo only)
+1. Launch `aflow` — a small floating pill appears at the bottom-center of the screen (logo only)
 2. **Hold Mode**: User holds **Ctrl+Shift** — pill expands showing animated audio bars
 3. **Hands-Free Mode**: User double-taps **Ctrl** — recording starts, tap Ctrl again to stop
 4. Audio bars react in real-time to microphone volume
@@ -81,7 +81,7 @@ This is a fully functional replacement for Wispr Flow ($15/month) built from scr
 
 ### Architecture
 ```
-sflow/
+aflow/
 ├── main.py                 # Entry point — wires hotkey → recorder → transcriber → clipboard
 ├── config.py               # Centralized configuration (loads .env)
 ├── ui/

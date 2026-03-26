@@ -1,7 +1,8 @@
 import subprocess
 import time
+from typing import Optional
 
-_saved_app: str | None = None
+_saved_app: Optional[str] = None
 
 
 def save_frontmost_app():
@@ -14,7 +15,7 @@ def save_frontmost_app():
             capture_output=True, text=True, timeout=2,
         )
         name = result.stdout.strip()
-        if name and name != "SFlow":
+        if name and name != "AFlow":
             _saved_app = name
     except Exception:
         pass

@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-"""PyInstaller spec for SFlow — macOS menu bar voice-to-text app."""
+"""PyInstaller spec for AFlow — macOS menu bar voice-to-text app."""
 
 from PyInstaller.utils.hooks import collect_all, collect_data_files, collect_submodules
 
@@ -94,7 +94,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='SFlow',
+    name='AFlow',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -115,22 +115,22 @@ coll = COLLECT(
     strip=False,
     upx=False,
     upx_exclude=[],
-    name='SFlow',
+    name='AFlow',
 )
 
 app = BUNDLE(
     coll,
-    name='SFlow.app',
-    icon='SFlow.icns',
-    bundle_identifier='so.saasfactory.sflow',
+    name='AFlow.app',
+    icon='AFlow.icns',
+    bundle_identifier='so.saasfactory.aflow',
     info_plist={
         'LSUIElement': True,
         'NSMicrophoneUsageDescription':
-            'SFlow necesita acceso al microfono para transcribir voz.',
+            'AFlow necesita acceso al microfono para transcribir voz.',
         'NSAppleEventsUsageDescription':
-            'SFlow usa AppleScript para pegar texto en otras aplicaciones.',
-        'CFBundleDisplayName': 'SFlow',
-        'CFBundleName': 'SFlow',
+            'AFlow usa AppleScript para pegar texto en otras aplicaciones.',
+        'CFBundleDisplayName': 'AFlow',
+        'CFBundleName': 'AFlow',
         'CFBundleVersion': '1.0.0',
         'CFBundleShortVersionString': '1.0.0',
         'LSApplicationCategoryType': 'public.app-category.productivity',

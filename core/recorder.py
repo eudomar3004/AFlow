@@ -2,6 +2,7 @@ import io
 import wave
 import queue
 import time
+from typing import Optional
 import numpy as np
 import sounddevice as sd
 from config import SAMPLE_RATE, CHANNELS, AUDIO_DTYPE, BLOCK_SIZE
@@ -11,7 +12,7 @@ class AudioRecorder:
     def __init__(self):
         self.audio_queue = queue.Queue()  # For UI visualization
         self.frames: list[np.ndarray] = []
-        self.stream: sd.InputStream | None = None
+        self.stream: Optional[sd.InputStream] = None
         self.is_recording = False
         self._start_time = 0.0
 
